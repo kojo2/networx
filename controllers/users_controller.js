@@ -14,22 +14,32 @@ exports.signup = function(req,res){
 	}else if(req.body.email.length<1){
 		res.render('notices',{message:"Please ensure you provide a valid email address",sendback:"true",adr:"/signup"});
 	}else{
-		var user = new User({username:req.body.username.toLowerCase()});
-		user.set('hashed_password',hashPW(req.body.password));
-		user.set('emailVerified',false);
-		user.set('favouritePosts',[]);
-		user.set('email',req.body.email);
-		//here we want to send an email with a special link that activates the account.
-		user.save(function(err){
-			if(err) {
-				res.redirect('/signup');
+		User.findOne({username:req.body.username}).exec(function(err,usr){
+			if(err){res.redirect('/signup');}
+			if(!usr){
+				createUser();
 			}else{
-				var code = AC.createCodeWithoutReqRes(user.username);
+				res.render("notices",{message:"Sorry that username already exists",sendback:"true",adr:"/signup"});
 			}
-				console.log("CODE===="+code);	
-				res.redirect('/sendMail/register/'+user.username+'/'+code);
-			
 		});
+		function createUser(){
+			var user = new User({username:req.body.username.toLowerCase()});	
+			user.set('hashed_password',hashPW(req.body.password));
+			user.set('emailVerified',false);
+			user.set('favouritePosts',[]);
+			user.set('email',req.body.email);
+			//here we want to send an email with a special link that activates the account.
+			user.save(function(err){
+				if(err) {
+					res.redirect('/signup');
+				}else{
+					var code = AC.createCodeWithoutReqRes(user.username);
+				}
+					console.log("CODE===="+code);	
+					res.redirect('/sendMail/register/'+user.username+'/'+code);
+				
+			});
+		}
 	}
 };
 

@@ -303,7 +303,7 @@ body {
  }
   
   #body input[type="text"]{
-    width:90%;
+    #max-width:90%;
     #margin-left: 2.8%;
   }
   
@@ -451,7 +451,9 @@ body {
 
 @media ( max-width:507px){
   
+  
    #body input[type="text"]{
+    max-width: 96%
     width:96%;
     margin-left: 0px;
   }
@@ -469,7 +471,7 @@ body {
   }
   
   #body input {
-    max-width:96%;
+   max-width:96%;
   }
   #body h1 {
     font-size: 16px;
