@@ -127,7 +127,7 @@ exports.findAllPostsForAllUsers = function(req,res){
 			Post.find({targettedUser:req.session.username},function(err,pos){
 				pss = pss.concat(pos);
 				//finally send it all to the client
-				//now we want to loop through all posts and add in hyperlink code anytime an @name is found
+	
 				
 				res.json(pss);
 			});
