@@ -1,0 +1,19 @@
+timeline
+add follows
+remove follows
+public timeline (my posts)
+delete account
+change password
+change username
+change email
+email registration
+limit on number of posts on timeline
+ability to go to posts from longer ago?
+tagline for profiles
+create new post
+go to single post
+delete post (if owned)
+Error page with custom text
+back buttons on all pages (general navigation)
+Add @ feature. If a post has @ on the beginning it is for that user only
+if it has an @ in the middle then it should appear on that person's timeline whether they are following the poster or not

@@ -1,0 +1,33 @@
+<html>
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/style.css"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="menubar">
+		</div>
+		<div id="body">
+			<h4><%= message %></h4>
+		</div>
+	</div>
+	<script>
+		if("<%= sendback %>"=="true"){
+			setTimeout(function(){
+				window.location.href="<%= adr %>";
+			},3000);
+		}else{
+			setTimeout(function(){
+				window.location.href="/";
+			},3000);
+		}
+	</script>
+</body>
+</html>

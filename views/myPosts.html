@@ -1,0 +1,97 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="../styles/style.css"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="btnCollapseMenu">Menu</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li><a href="/timeline">Home</a></li>
+				<li class="active"><a href="#">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li id="followListButton"><a href="#">Following</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+			</ul>
+		</div>
+		<div id="followList">
+			<h4>Currently following</h4>
+			<div ng-repeat="f in follows ">
+				<p><a ng-href="/profiles/{{f}}">{{f}}</a>
+				<a ng-href="/unfollowUser/{{f}}" id="unfollowButton">Unfollow User</a></p>
+			</div>
+		</div>
+		<div id="body">
+			<h2 id="name"><%= user %>'s posts</h2>
+			<div id="followButton">
+			</div>
+			<div id="tagline">
+				<%= tagline %>
+			</div>
+			<br><br>
+	</form>
+			<div id="feed">
+				<div class="msgUpdate" ng-repeat="t in posts track by $index">
+					{{t.message}}<br>
+					<span id="feedName">{{t.username}}</span>
+					{{t.DateTime}}
+					<a ng-href="/findSinglePostPage/{{t._id}}">Go to post</a>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script src="/scripts/OpenAndClose.js"></script>
+	<script>
+		var app = angular.module('myApp',[]);
+		var follows = {};
+		
+		app.controller('myCtrl',function($http,$scope){
+			$http.get('/findUsersFollows').success(function(response){
+				$scope.follows = response;
+			});
+			
+			$http.get('/findAllPostsForUser/<%= user %>').success(function(response3){
+				var arr = [];
+					var jsn = response3;
+						for (i in jsn){
+							//change date according to client's local time
+							var Dates = new Date(jsn[i].DateTime);
+							var hours = Dates.getHours();
+							jsn[i].DateTime=Dates.toString();
+							jsn[i].DateTime = jsn[i].DateTime.split("GMT")[0];
+							arr.push(jsn[i]);
+						}
+				$scope.posts = arr.reverse();
+			});
+			
+			$http.get('/checkFollowButton',{params:{id:"<%= user %>"}}).success(function(response){
+				if(response=="false"){
+					$("#followButton").html("<a href='/followUser/<%= user %>'>Follow this user</a>");
+					$("#followButton").css("visibility","visible");
+					console.log("false");
+				}else{
+					console.log(response);
+				}
+			});
+
+		
+	
+			
+			
+		});
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html ng-app="App" ng-controller="Ctrl">
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="../styles/style.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li class="active"><a href="/timeline">Home</a></li>
+				<li><a href="/myPosts">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li id="followListButton"><a href="#">Following</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				
+			</ul>
+		</div>
+		<div id="followList">
+			<h4>Currently following</h4>
+			<div ng-repeat="f in follows ">
+				<p>{{f}}
+				<a ng-href="/unfollowUser/{{f}}" id="unfollowButton">Unfollow User</a></p>
+			</div>
+		</div>
+		<div id="body">
+			<h4>Single Post Page</h4>
+			{{postObj.username}}
+			<br>
+			{{postObj.message}}
+			<br>{{postObj.DateTime}}
+			<br>Mentioned in this post: <a ng-href="/profiles/{{postObj.targettedUser}}">{{postObj.targettedUser}}</a>
+			<div id="deleteButton">
+			</div>
+			<a href="/timeline">Go back to home</a>
+		</div>
+	</div>
+	<script>
+		var app = angular.module('App',[]);
+		
+		app.controller('Ctrl',function($http,$scope){
+			$scope.p  = "<%= p %>"
+			var delButton = $("#deleteButton");
+			$http.get('/findSinglePost',{params: {sp:"<%= p %>"}}).success(function(response){
+				$scope.post = response;
+				var spost = JSON.stringify(response);
+				var a = spost.split('[');
+				var b = a[1].split(']');
+				var c = b[0];
+				var post = JSON.parse(c);
+				var Dates = new Date(post.DateTime);
+				var hours = Dates.getHours();
+				post.DateTime=Dates.toString();
+				post.DateTime = post.DateTime.split("GMT")[0];
+				$scope.postObj = post;
+				$http.get('/checkDeleteButton',{params: {id:post.username}}).success(function(response2){
+					if(response2=="match"){
+						var id = post._id;
+						delButton.html('<a href="/deletePost/'+id+'">Delete post</a><br><a href="/editPostPage/'+id+'">Edit post</a>');
+					}else{
+						delButton.html("");
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

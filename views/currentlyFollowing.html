@@ -1,0 +1,118 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li class="active"><a href="timeline.html">Home</a></li>
+				<li><a href="/myPublic">My Posts</a></li>
+			</ul>
+		</div>
+		<div id="body">
+			<h2 id="name"><%= user %></h2>
+			<br>
+			<%= tagline %>
+			<br><br>
+			<!-- take the code from the new post page and implement it in this box -->
+			<div id="status">
+				<form method="POST" action="/newPost">
+					<input type="text" name ="message" id = "statInput" ng-init="Status = 'What are you thinking?'" ng-model="Status" onClick="this.value='';"></input>
+					<input type="submit" value="Post" id="submit"/>
+				</form>
+			</div>
+	</form>
+			<div id="feed">
+				<div class="msgUpdate" ng-repeat="t in posts track by $index">
+					{{t.message}}<br>
+					{{t.username}}
+					{{t.DateTime}}
+					<a ng-href="/findSinglePostPage/{{t._id}}">Go to post</a>
+					<!--<a href="/singlePost">Go to post</a>-->
+					<hr>
+				</div>
+			</div>
+			
+			<p>Currently following:</p>
+			<div ng-repeat="f in follows ">
+				{{f}}
+				<a ng-href="/unfollowUser/{{f}}">Unfollow User</a>
+			</div>
+			<div>
+				<a href="/newPost">Create new post</a>
+				<a href="/findPtf">Find People to Follow</a>
+				<a href="/settings">Settings</a>
+				<a href="/logout">Log Out</a>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script>
+		var app = angular.module('myApp',[]);
+		var follows = {};
+		
+		app.controller('myCtrl',function($http,$scope){
+			$http.get('/findUsersFollows').success(function(response){
+				$scope.follows = response;
+				if(response.length<1){
+					console.log("followList doesn't exist!");
+					$http.get('/findAllPosts').success(function(response3){
+						
+						$scope.posts = response3;
+					});
+				}else{
+					$http.get('/findAllPostsForAllUsers',{params: {r:response}}).success(function(response3){
+						//response3 comes back as a json
+						//we want to convert it to an array
+						//each json object is made up of username:String,message:String,DateTime:String
+						//we want to take all that information and put it into an array
+						//array of json objects
+						//loop through json then push to array
+						//still doesn't work!
+						var arr = [];
+						var jsn = response3;
+						for (i in jsn){
+							console.log(jsn[i]);
+							arr.push(jsn[i]);
+						}
+						console.log("array is finished, it ended up as: "+arr);
+						/*arr.sort(function(a, b) {
+							//return parseFloat(a.price) - parseFloat(b.price);
+							return a.DateTime.localeCompare(b.DateTime);
+						});*/
+						arr.sort(function(a,b){
+							// Turn your strings into dates, and then subtract them
+							// to get a value that is either negative, positive, or zero.
+							return new Date(b.DateTime) - new Date(a.DateTime);
+						});
+
+						//arr.reverse();
+						console.log("finished sorting the array!");
+						console.log("the newly sorted array is:");
+						for(merg in arr){
+							console.log(arr[merg].DateTime+" .... "+arr[merg].message);
+						}
+						$scope.posts = arr;
+					});
+				}
+			});
+			
+			
+		
+	
+			
+			
+		});
+		
+	</script>
+</body>
+</html>

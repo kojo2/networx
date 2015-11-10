@@ -1,0 +1,53 @@
+<html>
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/style.css"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="btnCollapseMenu">Menu</div>
+		<br>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li><a href="/timeline">Home</a></li>
+				<li><a href="/myPosts">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li class="active"><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				
+			</ul>
+		</div>
+		<div id="body">
+			Change email for <span id="username"><%= username %></span>
+			<style>
+				#username {
+					text-transform:Capitalize;
+				}
+			</style>
+			<form method="POST" action="/changeEmail">
+				<br><label>Enter new email</label><input type="text" name="email"></input>
+				<br><input type="submit" value="Update Email Address"></input>
+			</form>	
+			<style>
+				#body input[type="text"]{
+					display: block;
+					width:500px;
+				}
+			</style>
+			<button id="cancel">Cancel</button>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		$("#cancel").click(function(){
+			window.location.href="/settings";
+		});
+	</script>
+	<script src="/scripts/OpenAndClose.js"></script>
+</body>
+</html>

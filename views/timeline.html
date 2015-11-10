@@ -1,0 +1,67 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="btnCollapseMenu">Menu</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li class="active"><a href="/timeline">Home</a></li>
+				<li><a href="/myPosts">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li id="followListButton"><a href="">Following</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				
+			</ul>
+		</div>
+		<div id="followList">
+			<h4>Currently following</h4>
+			<div ng-repeat="f in follows ">
+				<p><a ng-href="/profiles/{{f}}">{{f}}</a>
+				<a ng-href="/unfollowUser/{{f}}" id="unfollowButton">Unfollow User</a></p>
+			</div>
+		</div>
+		<div id="body">
+			<h2 id="name"><%= user %>'s timeline</h2>
+			<div id="tagline">
+				<%= tagline %>
+			</div>
+			<div id="status">
+				<form method="POST" action="/newPost">
+					<input type="text" name ="message" id = "statInput" ng-init="Status = 'What are you thinking?'" ng-model="Status" onClick="this.value='';"></input>
+					<input type="submit" value="Post" id="submit"/>
+				</form>
+			</div>
+			<div id="feed">
+				<div class="msgUpdate" ng-repeat="t in posts track by $index">
+					<div class="tMessage">{{t.message}}</div><br>
+					<style>
+						.tMessage:first-letter {
+							text-transform:capitalize;
+						}
+					</style>
+					<span id="feedName">Posted by: <a ng-href="/profiles/{{t.username}}">{{t.username}}</a></span>
+					{{t.DateTime}}<br>
+					<a ng-href="/findSinglePostPage/{{t._id}}">Go to post</a><br>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-sanitize.js"></script>
+<script src="/angularControllers/timelineController.js"></script>
+<script src="scripts/OpenAndClose.js"></script>
+</body>
+</html>

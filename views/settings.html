@@ -1,0 +1,50 @@
+<html>
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+	<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="btnCollapseMenu">Menu</div>
+		<br>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li><a href="/timeline">Home</a></li>
+				<li><a href="/myPosts">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li class="active"><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				
+			</ul>
+		</div>
+		<div id="followList">
+			<h4>Currently following</h4>
+			<div ng-repeat="f in follows ">
+				<p>{{f}}
+				<a ng-href="/unfollowUser/{{f}}" id="unfollowButton">Unfollow User</a></p>
+			</div>
+		</div>
+		<div id="body">
+			<h2 id="settingsHeading">Settings</h2>
+			<ul id="settings">
+				<li><a href="/changeTagline">Change Tagline</a></li><br>
+				<li><a href="/changePassword">Change password</a></li><br>
+				<li><a href="/changeEmail">Change email</a></li><br>
+				<li><a href="/deleteAccount">Delete account</a></li><br>
+				<li><a href="/timeline">Back to timeline</a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="./scripts/OpenAndClose.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,25 @@
+timestamp should be according to local client
+settings pages need styling
+should be able to do multiple mentions in the same post
+Need to implement email account activation
+Need to cloak angular code while loading
+limit length of posts
+limit length and character types of usernames and passwords
+forgot my password button (email new password link)
+setup a package.json
+set up a guest account for recruiters
+go through and remove old stuff / non-working and non-useful code
+commment code more thoroughly
+crash test
+window titles
+
+
+!something in the right hand side to make it more interesting
+!you can follow yourself - needs to be changed
+!followlist button wrong place with long name
+!you can scroll left and right on timeline
+!once you have followed user the follow button still comes up on their myposts page
+!tagline page needs to have old tagline automatically inserted
+!need to be able to click name in follow list to get to personal page of that user
+!need to be able to click name in posts to get to that user
+follow list needs only 5 displayed then "more" button for separate page

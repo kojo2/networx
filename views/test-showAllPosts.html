@@ -1,0 +1,18 @@
+<html ng-app="App" ng-controller="ctrl">
+<head>
+</head>
+<body>
+	<div ng-repeat="t in mergs">
+		{{t.message}} __  {{t.username}}
+	</div>
+<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script>
+	var app = angular.module('App',[]);
+	app.controller('ctrl',function($http,$scope){
+		$http.get('/findAllPostsForAllUsers').success(function(response){
+			$scope.mergs = response;
+		});
+	});
+</script>
+</body>
+</html>

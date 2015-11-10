@@ -1,0 +1,63 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+	<div class="containter-fluid">
+	<div class="menu">
+	</div>
+	<%= user %><br>
+	<%= tagline %>
+	<br><br>
+	<div ng-repeat="t in posts track by $index | orderBy: 'DateTime':true">
+		{{t.message}}<br>
+		{{t.username}}
+		{{t.DateTime}}
+		<a ng-href="/findSinglePostPage/{{t._id}}">Go to post</a>
+		<!--<a href="/singlePost">Go to post</a>-->
+		<hr>
+	</div>
+	
+	<p>Currently following:</p>
+	<div ng-repeat="f in follows ">
+		{{f}}
+		<a ng-href="/unfollowUser/{{f}}">Unfollow User</a>
+	</div>
+	<div>
+		<a href="/newPost">Create new post</a>
+		<a href="/findPtf">Find People to Follow</a>
+		<a href="/settings">Settings</a>
+		<a href="/logout">Log Out</a>
+	</div>
+	</div>
+	<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script>
+		var app = angular.module('myApp',[]);
+		var follows = {};
+		
+		app.controller('myCtrl',function($http,$scope){
+			$http.get('/findUsersFollows').success(function(response){
+				$scope.follows = response;
+				if(response.length<1){
+					console.log("followList doesn't exist!");
+					$http.get('/findAllPosts').success(function(response3){
+						//console.log("response3: "+response3);
+						$scope.posts = response3;
+					});
+				}else{
+					$http.get('/findAllPostsForAllUsers',{params: {r:response}}).success(function(response3){
+						console.log("response3: "+response3);
+						$scope.posts = response3;
+					});
+				}
+			});
+			
+			
+		});
+		
+	</script>
+</body>
+</html>

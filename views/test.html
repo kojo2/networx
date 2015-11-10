@@ -1,0 +1,24 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+</head>
+<body>
+Posting login
+<form method="POST" action="/login">
+	<label>Username:</label>
+	<input type="text" name="username"></input>
+	<input type="text" name="password"></input>
+	<input type="submit"></input>
+</form>
+<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+<script>
+/*
+	var app = angular.module('myApp',[]);
+	app.controller('myCtrl',function($http,$scope){
+		$http.post('/login').success(function(response){
+			$scope.blob = response;
+		});
+	});
+	*/
+</script>
+</body>
+</html>

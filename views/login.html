@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles/style.css"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">				
+			</ul>
+		</div>
+		<div id="body">
+			<h1>Please login below</h1>
+			<form method="POST" action="/login">
+				<label>Username:</label><br>
+				<input type="text" name="username"><br>
+				<label>Password:</label><br>
+				<input type="password" name="password"><br>
+				<input type="submit" value="Login" id="button"><br>
+			</form>
+			<a href="/signup">Register</a>
+			<style>
+					h1 {
+						margin-bottom:20px;
+					}
+					input {
+						width:400px;
+						margin-bottom:10px;
+					}
+					#button {
+						width:80px;
+						margin-top:10px
+					}
+			</style>
+		</div>
+	</div>
+</body>
+</html>

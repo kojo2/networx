@@ -1,0 +1,36 @@
+<html ng-app="App" ng-controller="Ctrl">
+<head>
+</head>
+<body>
+	<h1>Edit post</h1>
+	<p>Here is the post that you had already</p>
+	{{ message }}
+
+	<form method="POST" action="/editPost/<%= p %>">
+		<label>Message:</label>
+		<input type="text" name="message" id="message"></input>
+		<input type="submit" value="Post"></input>
+	</form>
+	<a href="/timeline">Cancel and return to home</a>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
+	<script>
+		var app = angular.module("App",[]);
+		
+		app.controller("Ctrl",function($http,$scope){
+			$http.get('/findSinglePost',{params: {sp:"<%= p %>"}}).success(function(response){
+				//Response comes back as string JSON with array brackets. 
+				//Need to manually remove array brackets using split before parsing string to JSON
+				var spost = JSON.stringify(response);
+				var a = spost.split('[');
+				var b = a[1].split(']');
+				var c = b[0];
+				var post = JSON.parse(c);
+				$scope.message = post.message;
+				$("#message").attr("value", post.message);
+			});
+			
+		});
+	</script>
+</body>
+</html>
