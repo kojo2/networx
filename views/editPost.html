@@ -1,17 +1,54 @@
 <html ng-app="App" ng-controller="Ctrl">
 <head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-	<h1>Edit post</h1>
-	<p>Here is the post that you had already</p>
-	{{ message }}
-
-	<form method="POST" action="/editPost/<%= p %>">
-		<label>Message:</label>
-		<input type="text" name="message" id="message"></input>
-		<input type="submit" value="Post"></input>
-	</form>
-	<a href="/timeline">Cancel and return to home</a>
+	<div class="container-fluid">
+		<div class="jumbotron" id="masthead">
+			<a href="/"><h2>Networx</h2></a>
+		</div>
+		<div id="btnCollapseMenu">Menu</div>
+		<div id="menubar">
+			<ul class="nav nav-pills" id="menu">
+				<li class="active"><a href="/timeline">Home</a></li>
+				<li><a href="/myPosts">My Posts</a></li>
+				<li><a href="/findPtf">People</a></li>
+				<li id="followListButton"><a href="">Following</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				
+			</ul>
+		</div>
+		<div id="body">
+			<h1>Edit post</h1>
+			<p>Here is the post that you had already</p>
+			{{ message }}
+			<br><br>
+			<form method="POST" action="/editPost/<%= p %>">
+				<label>New Message:</label>
+				<input type="text" name="message" id="message"></input>
+				<br><br>
+				<input type="submit" value="Post"></input>
+				<style>
+					input[type="text"] {
+						min-width:200px;
+						width:50%;
+					}
+					
+					input[type="submit"]{
+						width:100px;
+					}
+				</style>
+				
+			</form>
+			<a href="/timeline">Cancel and return to home</a>
+		</div>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
 	<script>

@@ -44,16 +44,28 @@ exports.createPost = function(req,res){
 exports.editPost = function(req,res){
 	Post.findById(req.params.pte, function (err, doc) {
 		if(err) console.log(err);
-		doc.message = req.body.message;
-		doc.save();
-		res.redirect("/timeline");
+		if(req.session.username==doc.username){
+			doc.message = req.body.message;
+			doc.save();
+			res.redirect("/timeline");
+		}else{
+			res.render('notices',{message:"Nice try hax0r but you can't edit other people's posts!",sendback:"false",adr:""});
+		}
 	});
 }
 
 exports.deletePost = function(req,res){
-	Post.findOneAndRemove({'_id' : req.params.ptd}, function (err,doc){
-		res.redirect("/timeline");
-    });
+	Post.findOne({'_id' : req.params.ptd}).exec(function(err,p){
+		if(req.session.username==p.username){
+			p.remove();
+			res.redirect('/');
+		}else{
+			res.render('notices',{message:"Nice try hax0r but you can't delete other people's posts!",sendback:"false",adr:""});
+		}
+	});
+	//Post.findOneAndRemove({'_id' : req.params.ptd}, function (err,doc){
+	//	res.redirect("/timeline");
+    //});
 };
 
 exports.findSinglePost = function(req,res){
