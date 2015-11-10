@@ -1,5 +1,5 @@
 # networx
-nworx.co.uk code
+nworx.co.uk
 
 This is the code for nworx.co.uk
 The website is a nodeJS (MEAN stack) microblogging site like Twitter, it allows a user to post to their timeline
