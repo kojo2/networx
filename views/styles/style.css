@@ -245,13 +245,24 @@ body {
 }
 
 #searchbar {
-  display: inline;
-  margin-left: 30%;
-  margin-bottom: 40px;
-  width:24%;
+  margin-left: 32%;
 }
-#searchbar input {
-  margin-left: 10px;
+
+#searchbar label {
+  margin-left:17.8%;
+}
+
+#searchbar input[type="text"] {
+  display: block;
+  margin-left: 0%;
+  #margin-bottom: 40px;
+  margin-bottom: 20px;
+  width:50%;
+}
+
+#buttonGo {
+  margin-bottom:20px;
+  width:50%;
 }
 
 #settings {
@@ -307,6 +318,7 @@ body {
     #margin-left: 2.8%;
   }
   
+  
   #body input[type="submit"]{
     #margin-left: 29%;
   }
@@ -326,6 +338,11 @@ body {
   
   #body #statInput {
     margin-left:2.8%;
+    width:90%;
+  }
+  
+  #body #submit {
+    margin-left:26.7%;
   }
   
   #feed {
@@ -342,8 +359,15 @@ body {
     margin-left: 39%;
   }
   
+  #searchbar input {
+    margin-left:10%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+    width:80%;
+  }
+  
   #ptf {
-    margin-left:27%;
+    margin-left:23.5%;
   }
   
   #searchbar label {
@@ -455,7 +479,7 @@ body {
    #body input[type="text"]{
     max-width: 96%
     width:96%;
-    margin-left: 0px;
+    margin-left: 5%;
   }
   
   #body input[type="submit"]{
@@ -490,7 +514,7 @@ body {
   #ptf {
     margin-top: 5%;
     width:95%;
-    margin-left:3%;
+    margin-left:5.6%;
   }
   #ptfFollowButton {
 	  margin-left:-3%;
@@ -500,6 +524,7 @@ body {
   #searchbar input {
     width:86.7%;
     margin-left:4%;
+    margin-bottom:10%;
   }
   
   #searchbar label{
@@ -528,6 +553,9 @@ body {
   
   #body #cancel {
     #margin-left: 2%;
+  }
+  #body #loginUsername{
+    margin-left: 0%;
   }
   
 }
