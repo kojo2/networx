@@ -56,8 +56,8 @@
 			var app = angular.module('App',[]);
 			app.controller('Ctrl',function($http,$scope){
 				$("#buttonGo").click(function(){
-					if($("#searchBar").val().length>0){
-						$http.post('/search/'+$("#searchBar").val()).success(function(response1){
+					if($("#searchBarInput").val().length>0){
+						$http.post('/search/'+$("#searchBarInput").val()).success(function(response1){
 							if(response1.length>0){
 								$scope.users = response1;
 								$scope.eror="";
