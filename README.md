@@ -13,4 +13,5 @@ Posts are limited to 140 characters.
 If you would like to browse the site without creating an account then use the guest account
 
 Username: guest
+
 password: guest
