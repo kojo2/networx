@@ -49,7 +49,7 @@ exports.editPost = function(req,res){
 			doc.save();
 			res.redirect("/timeline");
 		}else{
-			res.render('notices',{message:"Nice try hax0r but you can't edit other people's posts!",sendback:"false",adr:""});
+			res.render('notices',{message:"You can't edit other people's posts!",sendback:"false",adr:""});
 		}
 	});
 }
@@ -60,7 +60,7 @@ exports.deletePost = function(req,res){
 			p.remove();
 			res.redirect('/');
 		}else{
-			res.render('notices',{message:"Nice try hax0r but you can't delete other people's posts!",sendback:"false",adr:""});
+			res.render('notices',{message:"You can't delete other people's posts!",sendback:"false",adr:""});
 		}
 	});
 	//Post.findOneAndRemove({'_id' : req.params.ptd}, function (err,doc){
