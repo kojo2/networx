@@ -19,6 +19,6 @@ password: guest
 
 Structure of the code:
 
-The basis of the server is found in server.js, which runs on Express. This server file then "requires" (ie pulls in) routes.js which holds all the get and post routes. The models, views, and controllers folder are self explanatory. Routes.js directs requests to the right controller js file, and that controller then uses mongoose to query the mongoDB database. The result is mostly rendered with EJS from Routes.js into the appropriate view file (inside views folder).
+The basis of the server is found in server.js, which runs on Express. This server file then "requires" (ie pulls in) routes.js which holds all the get and post routes. The models, views, and controllers folders are self explanatory. Routes.js directs requests to the right controller js file, and that controller then uses mongoose to query the mongoDB database. The result is mostly rendered with EJS from Routes.js into the appropriate view file (inside views folder).
 
 The views use angular to GET and POST requests to the server and the result is bound to the HTML DOM elements on the page. If you're wondering why pages uses both EJS and Angular for displaying data it is because the EJS variables are set before the page is opened and Angular variables are set after the page has rendered. 
